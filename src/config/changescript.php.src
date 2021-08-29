@@ -1,0 +1,18 @@
+<?php
+    // connect your database here first 
+
+    // Actual code starts here 
+
+    $sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = 'your_database_name' 
+        AND ENGINE = 'MyISAM'";
+
+    $rs = mysqli_query($dbcon,$sql);
+
+    while($row = mysqli_fetch_array($rs))
+    {
+        $tbl = $row[0];
+        $sql = "ALTER TABLE `$tbl` ENGINE=INNODB";
+        mysql_query($dbcon,$sql);
+    }
+?>
